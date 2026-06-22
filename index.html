@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master English Grammar – Perfect Tenses Quiz</title>
+<style>
+  :root {
+    --green: #4caf50;
+    --green-dark: #388e3c;
+    --yellow: #f9a825;
+    --red: #e53935;
+    --blue: #1976d2;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #607d8b;
+    --radius: 14px;
+    --shadow: 0 4px 18px rgba(0,0,0,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 24px 12px 40px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 480px;
+    padding: 28px 24px;
+  }
+
+  /* BRAND */
+  .brand {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  /* MENU */
+  .menu-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .menu-sub {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .section-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 14px;
+    text-align: left;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .section-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .section-btn .sec-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .section-btn.s1 { background: #e8f5e9; color: #2e7d32; }
+  .section-btn.s2 { background: #e3f2fd; color: #1565c0; }
+  .section-btn.s3 { background: #fff8e1; color: #e65100; }
+  .section-btn.s4 { background: #f3e5f5; color: #6a1b9a; }
+  .menu-tip {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  /* QUIZ HEADER */
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .quiz-section-name {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+  .exit-btn {
+    background: none;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    padding: 5px 13px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  .exit-btn:hover { background: #f5f5f5; }
+
+  /* PROGRESS */
+  .progress-bar-bg {
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), #81c784);
+    border-radius: 3px;
+    transition: width 0.4s;
+  }
+
+  /* QUESTION */
+  .q-count {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .q-text {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  /* OPTIONS */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .opt-btn {
+    background: #f7f9fc;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    color: var(--text);
+    font-weight: 500;
+    transition: border-color 0.15s, background 0.15s;
+    line-height: 1.4;
+  }
+  .opt-btn:hover:not(:disabled) { border-color: var(--green); background: #e8f5e9; }
+  .opt-btn.correct { background: #e8f5e9; border-color: var(--green); color: #2e7d32; font-weight: 700; }
+  .opt-btn.wrong { background: #ffebee; border-color: var(--red); color: var(--red); }
+  .opt-btn:disabled { cursor: default; }
+
+  /* HINT */
+  .hint-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .hint-btn {
+    background: none;
+    border: 1.5px solid var(--yellow);
+    color: #e65100;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .hint-btn:hover { background: #fff8e1; }
+  .hint-text {
+    font-size: 13px;
+    color: #e65100;
+    font-style: italic;
+    display: none;
+  }
+
+  /* FEEDBACK */
+  .feedback {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    display: none;
+  }
+  .feedback.correct { background: #e8f5e9; color: #2e7d32; }
+  .feedback.wrong { background: #ffebee; color: #c62828; }
+
+  /* NEXT BTN */
+  .next-btn {
+    display: none;
+    margin-top: 18px;
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .next-btn:hover { background: var(--green-dark); }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: #f7f9fc;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .stat-pill span { color: var(--text); }
+
+  /* END SCREEN */
+  .end-screen { text-align: center; }
+  .trophy { font-size: 56px; margin-bottom: 8px; }
+  .stars-row { display: flex; justify-content: center; gap: 6px; margin-bottom: 14px; min-height: 36px; }
+  .star {
+    font-size: 28px;
+    opacity: 0;
+    transform: scale(0.3);
+    transition: opacity 0.35s, transform 0.35s;
+  }
+  .star.pop { opacity: 1; transform: scale(1); }
+  .end-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .end-sub { font-size: 14px; color: var(--muted); margin-bottom: 22px; }
+  .score-pills {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .score-pill {
+    background: #f7f9fc;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .score-pill.pts { border-color: var(--green); color: var(--green-dark); }
+  .score-pill.correct-pill { border-color: #43a047; }
+  .score-pill.wrong-pill { border-color: var(--red); color: var(--red); }
+  .score-pill.pct { border-color: var(--blue); color: var(--blue); }
+
+  .end-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+  .end-btn {
+    padding: 12px 22px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s;
+  }
+  .end-btn:hover { transform: translateY(-2px); }
+  .end-btn.primary { background: var(--green); color: white; }
+  .end-btn.secondary { background: #e3f2fd; color: var(--blue); }
+
+  /* REVIEW BOX — Parents & Educators */
+  .review-box {
+    background: #fafafa;
+    border: 1.5px solid #ddd;
+    border-radius: var(--radius);
+    padding: 18px 20px 20px;
+    margin-top: 4px;
+    text-align: left;
+  }
+  .review-box-notice {
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .review-box h3 {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #1a1a2e;
+    line-height: 1.4;
+  }
+  .review-box p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .review-box p:last-of-type { margin-bottom: 16px; }
+  .review-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .review-btn {
+    padding: 11px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s;
+  }
+  .review-btn:hover { transform: translateY(-1px); }
+  .review-btn.etsy { background: #1a1a2e; color: white; width: 100%; text-align: center; }
+  .review-btn.amazon { background: #1a1a2e; color: white; text-align: center; }
+
+  /* ENCOURAGE */
+  .encourage-icon { font-size: 52px; margin-bottom: 10px; }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="card" id="app"></div>
+
+<script>
+// ─── URL PARAM ───────────────────────────────────────────────
+const urlParams = new URLSearchParams(window.location.search);
+const srcParam = urlParams.get('src'); // 'etsy', 'amazon', or null
+
+const PAPERBACK_ASIN = 'B0DT4QPM2M';
+const HARDCOVER_ASIN = 'B0F6TB87R5';
+
+// ─── QUESTION BANK ───────────────────────────────────────────
+const sections = [
+  {
+    id: 1,
+    name: 'Chapter 1',
+    title: 'Present Perfect Tense',
+    color: 's1',
+    questions: [
+      {
+        q: 'Which sentence is in the Present Perfect Tense?',
+        options: [
+          'She visited Paris last year.',
+          'She has visited Paris three times.',
+          'She will visit Paris next summer.',
+          'She visits Paris every year.'
+        ],
+        answer: 1,
+        hint: 'Present Perfect uses have/has + past participle.'
+      },
+      {
+        q: 'What is the correct formula for the Present Perfect Tense?',
+        options: [
+          'Subject + will + verb',
+          'Subject + had + past participle',
+          'Subject + have/has + past participle',
+          'Subject + is/are + verb-ing'
+        ],
+        answer: 2,
+        hint: 'Think: have/has + V3.'
+      },
+      {
+        q: 'Which auxiliary verb is used with "he," "she," and "it" in the Present Perfect?',
+        options: ['have', 'had', 'has', 'will have'],
+        answer: 2,
+        hint: '"Has" is for third-person singular subjects.'
+      },
+      {
+        q: 'Complete the sentence: "I ______ never eaten sushi before."',
+        options: ['had', 'have', 'has', 'will have'],
+        answer: 1,
+        hint: 'The subject is "I" — use "have".'
+      },
+      {
+        q: 'Which time expression means the action happened very recently?',
+        options: ['yet', 'since', 'already', 'just'],
+        answer: 3,
+        hint: '"Just" means a moment ago.'
+      },
+      {
+        q: '"For" is used to show ______.',
+        options: [
+          'a starting point in time',
+          'a period of time (duration)',
+          'a recent action',
+          'an action that never happened'
+        ],
+        answer: 1,
+        hint: '"For five years" = duration. "Since 2010" = starting point.'
+      },
+      {
+        q: 'Which sentence correctly uses "yet"?',
+        options: [
+          'She has yet visited the museum.',
+          'They have not finished their project yet.',
+          'He has yet traveled abroad.',
+          'I have yet met him.'
+        ],
+        answer: 1,
+        hint: '"Yet" appears in negative sentences or questions, usually at the end.'
+      },
+      {
+        q: 'Choose the correct negative sentence:',
+        options: [
+          'She have not called me.',
+          'They has not arrived yet.',
+          'I have not seen that movie.',
+          'He have not finished his work.'
+        ],
+        answer: 2,
+        hint: '"I" uses "have not" — check the other subjects too.'
+      },
+      {
+        q: 'How do you form a question in the Present Perfect Tense?',
+        options: [
+          'Subject + have/has + past participle?',
+          'Have/Has + subject + past participle?',
+          'Did + subject + past participle?',
+          'Will + subject + have + past participle?'
+        ],
+        answer: 1,
+        hint: 'In questions, the auxiliary verb comes first.'
+      },
+      {
+        q: 'What is the short affirmative answer to: "Have you ever been to Japan?"',
+        options: ['Yes, I had.', 'Yes, I did.', 'Yes, I have.', 'Yes, I will.'],
+        answer: 2,
+        hint: 'Short answers mirror the auxiliary verb in the question.'
+      },
+      {
+        q: '"She ______ at this company since 2010." Choose the correct option.',
+        options: [
+          'has worked',
+          'had worked',
+          'will have worked',
+          'was working'
+        ],
+        answer: 0,
+        hint: '"Since" + Present Perfect = action that started then and still continues.'
+      },
+      {
+        q: 'Which sentence uses the Present Perfect to describe a life experience?',
+        options: [
+          'She worked in London for two years.',
+          'Have you ever ridden a horse?',
+          'By next year, I will have learned French.',
+          'He was reading when I called.'
+        ],
+        answer: 1,
+        hint: 'Life experiences use "ever" with the Present Perfect.'
+      },
+      {
+        q: 'The verb "go" in the Past Participle (V3) form is:',
+        options: ['goed', 'went', 'gone', 'going'],
+        answer: 2,
+        hint: 'Irregular verb: go → went → gone.'
+      },
+      {
+        q: 'Which sentence correctly uses "already"?',
+        options: [
+          'They have already left for the airport.',
+          'She have already eaten.',
+          'He already has finished.',
+          'We already have seen that film yet.'
+        ],
+        answer: 0,
+        hint: '"Already" goes between have/has and the past participle.'
+      },
+      {
+        q: '"Have not" contracts to ______ in informal speech.',
+        options: ['havetn\'t', 'hasn\'t', 'haven\'t', 'hadnt\''],
+        answer: 2,
+        hint: 'Drop the letter "o" and add an apostrophe.'
+      }
+    ]
+  },
+  {
+    id: 2,
+    name: 'Chapter 2',
+    title: 'Past Perfect Tense',
+    color: 's2',
+    questions: [
+      {
+        q: 'What is the correct formula for the Past Perfect Tense?',
+        options: [
+          'Subject + have/has + past participle',
+          'Subject + had + past participle',
+          'Subject + will have + past participle',
+          'Subject + was/were + past participle'
+        ],
+        answer: 1,
+        hint: 'Past Perfect always uses "had" — for ALL subjects.'
+      },
+      {
+        q: 'Which auxiliary verb is used for ALL subjects in the Past Perfect Tense?',
+        options: ['have', 'has', 'had', 'will have'],
+        answer: 2,
+        hint: '"Had" does not change — it works with I, you, we, they, he, she, it.'
+      },
+      {
+        q: 'Choose the sentence that uses the Past Perfect correctly:',
+        options: [
+          'When we arrived, they already left.',
+          'When we arrived, they had already left.',
+          'When we arrived, they have already left.',
+          'When we arrived, they will have already left.'
+        ],
+        answer: 1,
+        hint: 'The action that happened FIRST uses Past Perfect.'
+      },
+      {
+        q: '"By the time" is a common time expression used with:',
+        options: [
+          'Present Perfect only',
+          'Future Perfect only',
+          'Past Perfect only',
+          'Both Past Perfect and Future Perfect'
+        ],
+        answer: 3,
+        hint: '"By the time we arrived, they had left." / "By the time you arrive, we will have left."'
+      },
+      {
+        q: 'Complete: "She ______ never visited Paris before her trip last year."',
+        options: ['has', 'have', 'had', 'will have'],
+        answer: 2,
+        hint: 'The experience is described before a past event — use Past Perfect.'
+      },
+      {
+        q: 'How do you form a question in the Past Perfect Tense?',
+        options: [
+          'Have + subject + past participle?',
+          'Did + subject + past participle?',
+          'Had + subject + past participle?',
+          'Will + subject + have + past participle?'
+        ],
+        answer: 2,
+        hint: '"Had" comes first in Past Perfect questions.'
+      },
+      {
+        q: 'What is the correct negative form of the Past Perfect?',
+        options: [
+          'Subject + have not + past participle',
+          'Subject + had not + past participle',
+          'Subject + has not + past participle',
+          'Subject + will not have + past participle'
+        ],
+        answer: 1,
+        hint: 'Negative: had + not (= hadn\'t) + past participle.'
+      },
+      {
+        q: '"Hadn\'t" is the contraction of:',
+        options: ['has not', 'have not', 'had not', 'will not have'],
+        answer: 2,
+        hint: 'Drop the "o" and add an apostrophe: had + not = hadn\'t.'
+      },
+      {
+        q: 'Choose the correct short answer: "Had she arrived before the meeting?" → ______',
+        options: [
+          'Yes, she has.',
+          'Yes, she had.',
+          'Yes, she have.',
+          'Yes, she will.'
+        ],
+        answer: 1,
+        hint: 'Short answers for Past Perfect use "had."'
+      },
+      {
+        q: 'Which sentence shows the Past Perfect used to show the earlier of two past actions?',
+        options: [
+          'I will have finished before you arrive.',
+          'She has completed the project.',
+          'After he had eaten, he went to bed.',
+          'They eat dinner every evening.'
+        ],
+        answer: 2,
+        hint: 'The Past Perfect shows what happened FIRST before another past action.'
+      },
+      {
+        q: '"Before" in the Past Perfect shows that ______.',
+        options: [
+          'one action will happen in the future',
+          'one action was completed earlier than another past action',
+          'one action continues from the past to now',
+          'one action happened at an unspecified time'
+        ],
+        answer: 1,
+        hint: 'Example: "She had left before we arrived."'
+      },
+      {
+        q: 'Complete: "By the time I found my wallet, I ______ already ______ my credit cards." (cancel)',
+        options: [
+          'have … cancelled',
+          'had … cancelled',
+          'will have … cancelled',
+          'has … cancelled'
+        ],
+        answer: 1,
+        hint: 'The wallet-finding happened in the past, and cancelling happened BEFORE that.'
+      },
+      {
+        q: 'Which time expression shows an action completed "moments before" another past action?',
+        options: ['before', 'already', 'just', 'never'],
+        answer: 2,
+        hint: '"He had just left when she called." = moments before.'
+      },
+      {
+        q: 'Which of the following is the past participle (V3) of "eat"?',
+        options: ['eated', 'ate', 'eaten', 'eating'],
+        answer: 2,
+        hint: 'Irregular verb: eat → ate → eaten.'
+      },
+      {
+        q: '"She ______ graduated from college before she started her first job."',
+        options: ['has', 'have', 'had', 'will have'],
+        answer: 2,
+        hint: 'Graduating happened before starting the job — both in the past.'
+      }
+    ]
+  },
+  {
+    id: 3,
+    name: 'Chapter 3',
+    title: 'Future Perfect Tense',
+    color: 's3',
+    questions: [
+      {
+        q: 'What is the correct formula for the Future Perfect Tense?',
+        options: [
+          'Subject + have/has + past participle',
+          'Subject + had + past participle',
+          'Subject + will have + past participle',
+          'Subject + will + base verb'
+        ],
+        answer: 2,
+        hint: 'Future Perfect = will have + past participle (V3).'
+      },
+      {
+        q: '"Will have" is used for ______ subjects in the Future Perfect Tense.',
+        options: [
+          'only I and you',
+          'only he, she, it',
+          'all subjects',
+          'only we and they'
+        ],
+        answer: 2,
+        hint: 'Unlike Present Perfect (have/has), "will have" never changes.'
+      },
+      {
+        q: 'Which sentence is in the Future Perfect Tense?',
+        options: [
+          'She finished her report by evening.',
+          'She has finished her report.',
+          'She will have finished her report by evening.',
+          'She had finished her report by evening.'
+        ],
+        answer: 2,
+        hint: 'Look for "will have + past participle."'
+      },
+      {
+        q: 'The Future Perfect Tense is used to describe ______.',
+        options: [
+          'actions happening right now',
+          'actions that will be completed before a specific future time',
+          'actions that started in the past and continue now',
+          'actions completed before another past action'
+        ],
+        answer: 1,
+        hint: 'Example: "By next week, I will have finished this book."'
+      },
+      {
+        q: 'Complete: "By the time you arrive, she ______ already ______." (leave)',
+        options: [
+          'has … left',
+          'had … left',
+          'will have … left',
+          'have … left'
+        ],
+        answer: 2,
+        hint: 'Both events are in the future — leaving happens BEFORE arriving.'
+      },
+      {
+        q: 'How do you form a question in the Future Perfect Tense?',
+        options: [
+          'Have/Has + subject + past participle?',
+          'Had + subject + past participle?',
+          'Will + subject + have + past participle?',
+          'Did + subject + past participle?'
+        ],
+        answer: 2,
+        hint: '"Will" moves to the front: Will + subject + have + V3?'
+      },
+      {
+        q: 'What is the negative form in the Future Perfect?',
+        options: [
+          'Subject + have not + past participle',
+          'Subject + had not + past participle',
+          'Subject + will not have + past participle',
+          'Subject + won\'t + past participle'
+        ],
+        answer: 2,
+        hint: '"Will not (won\'t) have" + past participle.'
+      },
+      {
+        q: '"Won\'t have" is the contracted negative form for ______.',
+        options: [
+          'has not have',
+          'had not have',
+          'will not have',
+          'would not have'
+        ],
+        answer: 2,
+        hint: 'will + not = won\'t, so: won\'t have.'
+      },
+      {
+        q: 'Which time expression is most commonly used with the Future Perfect?',
+        options: ['since', 'just', 'by', 'yet'],
+        answer: 2,
+        hint: 'Example: "By 5 PM, I will have finished." / "By the time you call…"'
+      },
+      {
+        q: 'Choose the correct short answer: "Will she have completed the project by Friday?" → ______',
+        options: [
+          'Yes, she will.',
+          'Yes, she has.',
+          'Yes, she will have.',
+          'Yes, she had.'
+        ],
+        answer: 2,
+        hint: 'Short answers in Future Perfect use "will have."'
+      },
+      {
+        q: '"By 2030, scientists ______ new technologies to combat climate change." (develop)',
+        options: [
+          'have developed',
+          'had developed',
+          'will have developed',
+          'will develop'
+        ],
+        answer: 2,
+        hint: '"By 2030" points to a future deadline — use Future Perfect.'
+      },
+      {
+        q: 'Which sentence uses "before" correctly with the Future Perfect?',
+        options: [
+          'She will have submitted her assignment before the deadline.',
+          'She has submitted her assignment before the deadline.',
+          'She had submitted her assignment before the deadline.',
+          'She submitted her assignment before the deadline.'
+        ],
+        answer: 0,
+        hint: '"Before + future event" pairs with Future Perfect.'
+      },
+      {
+        q: 'Identify the Future Perfect sentence from the Mastery Test:',
+        options: [
+          'She has completed her homework already.',
+          'By the time we arrived, the guests had left.',
+          'They will have finished the project by next Monday.',
+          'He has never traveled abroad before.'
+        ],
+        answer: 2,
+        hint: 'Future Perfect = will have + past participle, used with a future deadline.'
+      },
+      {
+        q: 'Complete: "By the end of this year, I ______ three new languages." (learn)',
+        options: [
+          'have learned',
+          'had learned',
+          'will have learned',
+          'will learn'
+        ],
+        answer: 2,
+        hint: '"By the end of this year" = future deadline → Future Perfect.'
+      },
+      {
+        q: 'Which tense shows a milestone that will be reached before a deadline?',
+        options: [
+          'Present Perfect',
+          'Past Perfect',
+          'Future Perfect',
+          'Simple Future'
+        ],
+        answer: 2,
+        hint: 'Example: "We will have saved enough money to buy a house by next year."'
+      }
+    ]
+  }
+  ,{
+    id: 4,
+    name: 'Mastery Test',
+    title: 'All Perfect Tenses',
+    color: 's4',
+    questions: [
+      {
+        q: 'By the time the guests arrive, we ______ the house.',
+        options: ['will have cleaned', 'had cleaned', 'have cleaned', 'were cleaning'],
+        answer: 0,
+        hint: 'Future event + deadline = Future Perfect.'
+      },
+      {
+        q: 'She ______ this movie three times already.',
+        options: ['had watched', 'will have watched', 'has watched', 'was watching'],
+        answer: 2,
+        hint: 'Experience up to now = Present Perfect.'
+      },
+      {
+        q: 'By the end of this year, I ______ my thesis.',
+        options: ['had completed', 'have completed', 'will have completed', 'completed'],
+        answer: 2,
+        hint: '"By the end of this year" = future deadline → Future Perfect.'
+      },
+      {
+        q: 'When we got to the station, the train ______.',
+        options: ['has left', 'will have left', 'was leaving', 'had left'],
+        answer: 3,
+        hint: 'The train leaving happened BEFORE arriving = Past Perfect.'
+      },
+      {
+        q: 'He ______ in the company for five years before he decided to leave.',
+        options: ['has worked', 'will have worked', 'had worked', 'was working'],
+        answer: 2,
+        hint: 'Working ended before another past action = Past Perfect.'
+      },
+      {
+        q: 'They ______ a new car before the prices went up.',
+        options: ['have bought', 'will have bought', 'had bought', 'buy'],
+        answer: 2,
+        hint: 'Buying happened before prices went up — both past = Past Perfect.'
+      },
+      {
+        q: 'By the end of the day, she ______ all her assignments.',
+        options: ['had completed', 'has completed', 'will have completed', 'completes'],
+        answer: 2,
+        hint: '"By the end of the day" is a future deadline = Future Perfect.'
+      },
+      {
+        q: 'I ______ this book many times.',
+        options: ['had read', 'will have read', 'have read', 'was reading'],
+        answer: 2,
+        hint: 'Repeated experience up to now = Present Perfect.'
+      },
+      {
+        q: 'By 2035, they ______ a new bridge over the river.',
+        options: ['had built', 'have built', 'will have built', 'build'],
+        answer: 2,
+        hint: '"By 2035" is a future point = Future Perfect.'
+      },
+      {
+        q: 'The train ______ before we reached the platform.',
+        options: ['has departed', 'will have departed', 'was departing', 'had departed'],
+        answer: 3,
+        hint: 'Departure happened BEFORE reaching = Past Perfect.'
+      },
+      {
+        q: 'She ______ the report before the meeting started.',
+        options: ['has finished', 'will have finished', 'had finished', 'finishes'],
+        answer: 2,
+        hint: 'Finishing happened BEFORE meeting started = Past Perfect.'
+      },
+      {
+        q: 'We ______ this problem several times already.',
+        options: ['had discussed', 'will have discussed', 'have discussed', 'discuss'],
+        answer: 2,
+        hint: 'Repeated action up to now = Present Perfect.'
+      },
+      {
+        q: 'By the time you wake up, I ______ breakfast.',
+        options: ['had made', 'have made', 'will have made', 'make'],
+        answer: 2,
+        hint: 'Both in the future — making breakfast will be done first = Future Perfect.'
+      },
+      {
+        q: 'Identify the sentence in the PAST PERFECT tense:',
+        options: [
+          'She has completed her homework already.',
+          'By the time we arrived, the guests had left.',
+          'They will have finished the project by next Monday.',
+          'He has never traveled abroad before.'
+        ],
+        answer: 1,
+        hint: 'Past Perfect = had + past participle, showing an earlier past action.'
+      },
+      {
+        q: 'Which sentence is in the PRESENT PERFECT tense?',
+        options: [
+          'By the time we arrived, the guests had left.',
+          'They will have finished the project by next Monday.',
+          'He has never traveled abroad before.',
+          'She had left before we arrived.'
+        ],
+        answer: 2,
+        hint: 'Present Perfect = have/has + past participle, connected to the present.'
+      }
+    ]
+  }
+
+];
+
+// ─── STATE ────────────────────────────────────────────────────
+let state = {
+  screen: 'menu',        // 'menu' | 'quiz' | 'end'
+  sectionIndex: null,
+  questions: [],
+  current: 0,
+  answered: false,
+  hintUsed: false,
+  points: 0,
+  correct: 0,
+  wrong: 0,
+  hintCount: 0
+};
+
+// ─── UTILS ───────────────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function prepareQuestions(sectionIndex) {
+  const raw = sections[sectionIndex].questions;
+  const shuffledQs = shuffle(raw);
+  return shuffledQs.map(q => {
+    const correctText = q.options[q.answer];
+    const shuffledOpts = shuffle(q.options);
+    const newAnswerIdx = shuffledOpts.indexOf(correctText);
+    return { ...q, options: shuffledOpts, answer: newAnswerIdx };
+  });
+}
+
+// ─── RENDER ──────────────────────────────────────────────────
+function render() {
+  const app = document.getElementById('app');
+  if (state.screen === 'menu') app.innerHTML = renderMenu();
+  else if (state.screen === 'quiz') app.innerHTML = renderQuiz();
+  else if (state.screen === 'end') app.innerHTML = renderEnd();
+  attachEvents();
+}
+
+function renderMenu() {
+  return `
+    <div class="brand">Agarutan Print</div>
+    <div class="menu-title">Master English Grammar<br>Perfect Tenses Quiz</div>
+    <div class="menu-sub">Choose a chapter to begin</div>
+    ${sections.map((s, i) => `
+      <button class="section-btn ${s.color}" data-start="${i}">
+        <span class="sec-label">${s.name}</span>
+        ${s.title}
+      </button>
+    `).join('')}
+    <div class="menu-tip">💡 Questions shuffle every time you restart</div>
+  `;
+}
+
+function renderQuiz() {
+  const q = state.questions[state.current];
+  const total = state.questions.length;
+  const pct = (state.current / total) * 100;
+  const section = sections[state.sectionIndex];
+
+  return `
+    <div class="quiz-header">
+      <div class="quiz-section-name">${section.name}: ${section.title}</div>
+      <button class="exit-btn" id="exitBtn">✕ Exit</button>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-pill">🏆 <span id="pts">${state.points}</span> pts</div>
+      <div class="stat-pill">✅ <span id="corr">${state.correct}</span></div>
+      <div class="stat-pill">❌ <span id="wrng">${state.wrong}</span></div>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+    <div class="q-count">Question ${state.current + 1} of ${total}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="options" id="opts">
+      ${q.options.map((o, i) => `
+        <button class="opt-btn" data-idx="${i}">${o}</button>
+      `).join('')}
+    </div>
+    <div class="hint-row">
+      <button class="hint-btn" id="hintBtn">💡 Hint (−5 pts)</button>
+      <span class="hint-text" id="hintText">${q.hint}</span>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <button class="next-btn" id="nextBtn">${state.current + 1 < total ? 'Next Question →' : 'See Results'}</button>
+  `;
+}
+
+function renderEnd() {
+  const section = sections[state.sectionIndex];
+  const total = state.questions.length;
+  const maxPts = total * 10;
+  const pct = Math.round((state.correct / total) * 100);
+  const passed = pct >= 70;
+  const isLastSection = state.sectionIndex === sections.length - 1;
+
+  let titleText = '';
+  let trophyEmoji = '';
+  if (passed) {
+    if (pct === 100) { titleText = '🏆 Spectacular!'; trophyEmoji = '🏆'; }
+    else if (pct >= 85) { titleText = '⭐ Excellent!'; trophyEmoji = '🌟'; }
+    else { titleText = '🌟 Great Job!'; trophyEmoji = '🎉'; }
+  }
+
+  const showReview = passed && isLastSection && srcParam;
+
+  let reviewHTML = '';
+  if (showReview) {
+    let btns = '';
+    if (srcParam === 'etsy') {
+      btns = `<a class="review-btn etsy" href="https://www.etsy.com/your/purchases" target="_blank">Review This Resource Bundle</a>`;
+    } else if (srcParam === 'amazon') {
+      btns = `
+        <a class="review-btn amazon" href="https://www.amazon.com/review/create-review?asin=${PAPERBACK_ASIN}" target="_blank">📗 Review Paperback</a>
+        <a class="review-btn amazon" href="https://www.amazon.com/review/create-review?asin=${HARDCOVER_ASIN}" target="_blank">📘 Review Hardcover</a>
+      `;
+    }
+    reviewHTML = `
+      <div class="review-box">
+        <div class="review-box-notice">🔒 Notice: For Parents &amp; Educators</div>
+        <h3>How did you like this complete resource bundle?</h3>
+        <p>Thank you for choosing <strong>Agarutan Print!</strong> We hope this combination of printable worksheets, the digital fillable PDF, and the interactive quiz bonus is helping to build your student's skills.</p>
+        <p>If this comprehensive resource bundle added value to your student's learning experience, please take a brief moment to share your feedback. Your review helps us continue creating high-quality learning assets!</p>
+        <div class="review-btns">${btns}</div>
+      </div>
+    `;
+  }
+
+  if (passed) {
+    return `
+      <div class="end-screen">
+        <div class="trophy">${trophyEmoji}</div>
+        <div class="stars-row" id="starsRow">
+          ${[0,1,2,3,4].map(i => `<span class="star" id="star${i}">⭐</span>`).join('')}
+        </div>
+        <div class="end-title">${titleText}</div>
+        <div class="end-sub">You scored ${pct}% on ${section.title}</div>
+        <div class="score-pills">
+          <div class="score-pill pts">🏆 ${state.points} pts</div>
+          <div class="score-pill correct-pill">✅ ${state.correct} correct</div>
+          <div class="score-pill wrong-pill">❌ ${state.wrong} wrong</div>
+          <div class="score-pill pct">🎯 ${pct}%</div>
+        </div>
+        <div class="end-btns">
+          <button class="end-btn primary" id="tryAgainBtn">🔄 Try Again</button>
+          <button class="end-btn secondary" id="menuBtn">🏠 Menu</button>
+        </div>
+        ${reviewHTML}
+      </div>
+    `;
+  } else {
+    return `
+      <div class="end-screen">
+        <div class="encourage-icon">💪</div>
+        <div class="end-title">Keep Practising!</div>
+        <div class="end-sub">You scored ${pct}% — aim for 70% to pass. You've got this!</div>
+        <div class="score-pills">
+          <div class="score-pill pts">🏆 ${state.points} pts</div>
+          <div class="score-pill correct-pill">✅ ${state.correct} correct</div>
+          <div class="score-pill wrong-pill">❌ ${state.wrong} wrong</div>
+          <div class="score-pill pct">🎯 ${pct}%</div>
+        </div>
+        <div class="end-btns">
+          <button class="end-btn primary" id="tryAgainBtn">🔄 Try Again</button>
+          <button class="end-btn secondary" id="menuBtn">🏠 Menu</button>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// ─── EVENTS ──────────────────────────────────────────────────
+function attachEvents() {
+  if (state.screen === 'menu') {
+    document.querySelectorAll('[data-start]').forEach(btn => {
+      btn.addEventListener('click', () => startSection(parseInt(btn.dataset.start)));
+    });
+  }
+
+  if (state.screen === 'quiz') {
+    document.getElementById('exitBtn').addEventListener('click', () => {
+      if (confirm('Exit to menu? Your progress will be lost.')) {
+        state.screen = 'menu';
+        render();
+      }
+    });
+
+    document.querySelectorAll('.opt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (state.answered) return;
+        selectAnswer(parseInt(btn.dataset.idx));
+      });
+    });
+
+    const hintBtn = document.getElementById('hintBtn');
+    if (hintBtn) {
+      hintBtn.addEventListener('click', () => {
+        if (state.answered || state.hintUsed) return;
+        state.hintUsed = true;
+        hintBtn.disabled = true;
+        hintBtn.style.opacity = '0.5';
+        document.getElementById('hintText').style.display = 'inline';
+      });
+    }
+
+    const nextBtn = document.getElementById('nextBtn');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', nextQuestion);
+    }
+  }
+
+  if (state.screen === 'end') {
+    const tryBtn = document.getElementById('tryAgainBtn');
+    const menuBtn = document.getElementById('menuBtn');
+    if (tryBtn) tryBtn.addEventListener('click', () => startSection(state.sectionIndex));
+    if (menuBtn) menuBtn.addEventListener('click', () => { state.screen = 'menu'; render(); });
+  }
+}
+
+function startSection(idx) {
+  state.sectionIndex = idx;
+  state.questions = prepareQuestions(idx);
+  state.current = 0;
+  state.answered = false;
+  state.hintUsed = false;
+  state.points = 0;
+  state.correct = 0;
+  state.wrong = 0;
+  state.screen = 'quiz';
+  render();
+}
+
+function selectAnswer(chosen) {
+  state.answered = true;
+  const q = state.questions[state.current];
+  const correct = q.answer;
+  const isCorrect = chosen === correct;
+
+  // Award points
+  if (isCorrect) {
+    const earned = state.hintUsed ? 5 : 10;
+    state.points += earned;
+    state.correct++;
+  } else {
+    state.wrong++;
+  }
+
+  // Style buttons
+  document.querySelectorAll('.opt-btn').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct) btn.classList.add('correct');
+    else if (i === chosen && !isCorrect) btn.classList.add('wrong');
+  });
+
+  // Feedback
+  const fb = document.getElementById('feedback');
+  if (isCorrect) {
+    fb.className = 'feedback correct';
+    fb.textContent = state.hintUsed ? '✅ Correct! (+5 pts — hint used)' : '✅ Correct! (+10 pts)';
+  } else {
+    fb.className = 'feedback wrong';
+    fb.textContent = `❌ The correct answer is: "${q.options[correct]}"`;
+  }
+  fb.style.display = 'block';
+
+  // Show next btn
+  document.getElementById('nextBtn').style.display = 'block';
+}
+
+function nextQuestion() {
+  state.current++;
+  if (state.current >= state.questions.length) {
+    state.screen = 'end';
+    render();
+    // Animate stars
+    const total = state.questions.length;
+    const pct = Math.round((state.correct / total) * 100);
+    if (pct >= 70) {
+      const numStars = pct >= 100 ? 5 : pct >= 85 ? 4 : 3;
+      for (let i = 0; i < numStars; i++) {
+        setTimeout(() => {
+          const el = document.getElementById('star' + i);
+          if (el) el.classList.add('pop');
+        }, 200 + i * 180);
+      }
+    }
+  } else {
+    state.answered = false;
+    state.hintUsed = false;
+    render();
+  }
+}
+
+// ─── INIT ────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
